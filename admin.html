@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin - Siêu thị sữa Thành Hậu</title>
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="admin.html" aria-label="Trang quản trị">
+      <span class="admin-brand__mark">TH</span>
+      <span>
+        <strong>Thành Hậu</strong>
+        <small>Quản trị website</small>
+      </span>
+    </a>
+
+    <nav class="admin-nav" aria-label="Điều hướng quản trị">
+      <button class="admin-nav__item active" type="button" data-admin-tab="dashboard">Tổng quan</button>
+      <button class="admin-nav__item" type="button" data-admin-tab="products">Sản phẩm</button>
+      <button class="admin-nav__item" type="button" data-admin-tab="orders">Đơn hàng</button>
+      <button class="admin-nav__item" type="button" data-admin-tab="content">Nội dung</button>
+      <button class="admin-nav__item" type="button" data-admin-tab="customers">Khách hàng</button>
+      <button class="admin-nav__item" type="button" data-admin-tab="pages">Trang website</button>
+      <button class="admin-nav__item" type="button" data-admin-tab="settings">Cài đặt</button>
+    </nav>
+
+    <div class="admin-sidebar__footer">
+      <a href="index.html">Xem website</a>
+      <a href="login.html">Trang đăng nhập</a>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div>
+        <p class="admin-eyebrow">Siêu thị sữa Thành Hậu</p>
+        <h1 id="adminPageTitle">Tổng quan</h1>
+      </div>
+      <div class="admin-actions">
+        <label class="admin-search">
+          <span>Tìm</span>
+          <input id="globalSearch" type="search" placeholder="Tìm sản phẩm, đơn hàng, bài viết...">
+        </label>
+        <button class="admin-btn admin-btn--ghost" type="button" id="exportDataBtn">Xuất JSON</button>
+      </div>
+    </header>
+
+    <section class="admin-panel active" id="dashboard" data-panel-title="Tổng quan">
+      <div class="metric-grid">
+        <article class="metric-card">
+          <span>Doanh thu hôm nay</span>
+          <strong>8.420.000đ</strong>
+          <small>+12% so với hôm qua</small>
+        </article>
+        <article class="metric-card">
+          <span>Đơn mới</span>
+          <strong id="orderCountMetric">0</strong>
+          <small>Đang chờ xử lý</small>
+        </article>
+        <article class="metric-card">
+          <span>Sản phẩm</span>
+          <strong id="productCountMetric">0</strong>
+          <small>Đang hiển thị trên website</small>
+        </article>
+        <article class="metric-card">
+          <span>Khách hàng</span>
+          <strong id="customerCountMetric">0</strong>
+          <small>Đã lưu thông tin</small>
+        </article>
+      </div>
+
+      <div class="admin-grid admin-grid--two">
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2>Đơn hàng gần đây</h2>
+            <button class="admin-link" type="button" data-admin-jump="orders">Xem tất cả</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Mã đơn</th>
+                  <th>Khách hàng</th>
+                  <th>Trạng thái</th>
+                  <th>Tổng</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2>Cần xử lý</h2>
+          </div>
+          <ul class="task-list">
+            <li><span>Kiểm tra sản phẩm sắp hết hàng</span><strong>4</strong></li>
+            <li><span>Xác nhận đơn chuyển khoản</span><strong>3</strong></li>
+            <li><span>Cập nhật bài tư vấn dinh dưỡng</span><strong>2</strong></li>
+            <li><span>Kiểm tra banner khuyến mãi</span><strong>1</strong></li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="admin-panel" id="products" data-panel-title="Quản lý sản phẩm">
+      <div class="admin-layout">
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2>Danh sách sản phẩm</h2>
+            <div class="admin-filter">
+              <select id="productCategoryFilter">
+                <option value="">Tất cả danh mục</option>
+                <option value="Sữa bột">Sữa bột</option>
+                <option value="Sữa tươi">Sữa tươi</option>
+                <option value="Sữa chua">Sữa chua</option>
+                <option value="Mẹ và bé">Mẹ và bé</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Tên sản phẩm</th>
+                  <th>Danh mục</th>
+                  <th>Giá</th>
+                  <th>Tồn kho</th>
+                  <th>Trạng thái</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="productsBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-card admin-card--sticky">
+          <div class="admin-card__header">
+            <h2 id="productFormTitle">Thêm sản phẩm</h2>
+          </div>
+          <form class="admin-form" id="productForm">
+            <input type="hidden" id="productId">
+            <label>
+              <span>Tên sản phẩm</span>
+              <input id="productName" type="text" required placeholder="VD: Sữa bột dinh dưỡng 800g">
+            </label>
+            <label>
+              <span>Danh mục</span>
+              <select id="productCategory" required>
+                <option value="Sữa bột">Sữa bột</option>
+                <option value="Sữa tươi">Sữa tươi</option>
+                <option value="Sữa chua">Sữa chua</option>
+                <option value="Mẹ và bé">Mẹ và bé</option>
+              </select>
+            </label>
+            <div class="admin-form__row">
+              <label>
+                <span>Giá</span>
+                <input id="productPrice" type="number" min="0" step="1000" required>
+              </label>
+              <label>
+                <span>Tồn kho</span>
+                <input id="productStock" type="number" min="0" required>
+              </label>
+            </div>
+            <label>
+              <span>Trạng thái</span>
+              <select id="productStatus">
+                <option value="Đang bán">Đang bán</option>
+                <option value="Ẩn">Ẩn</option>
+                <option value="Hết hàng">Hết hàng</option>
+              </select>
+            </label>
+            <label>
+              <span>Mô tả ngắn</span>
+              <textarea id="productDescription" rows="4" placeholder="Mô tả công dụng, độ tuổi, quy cách..."></textarea>
+            </label>
+            <div class="admin-form__actions">
+              <button class="admin-btn" type="submit">Lưu sản phẩm</button>
+              <button class="admin-btn admin-btn--ghost" type="button" id="resetProductForm">Làm mới</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </section>
+
+    <section class="admin-panel" id="orders" data-panel-title="Quản lý đơn hàng">
+      <section class="admin-card">
+        <div class="admin-card__header">
+          <h2>Đơn hàng</h2>
+          <div class="admin-filter">
+            <select id="orderStatusFilter">
+              <option value="">Tất cả trạng thái</option>
+              <option value="Chờ xác nhận">Chờ xác nhận</option>
+              <option value="Đang giao">Đang giao</option>
+              <option value="Hoàn tất">Hoàn tất</option>
+              <option value="Đã hủy">Đã hủy</option>
+            </select>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Mã đơn</th>
+                <th>Khách hàng</th>
+                <th>Sản phẩm</th>
+                <th>Ngày đặt</th>
+                <th>Trạng thái</th>
+                <th>Tổng</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="admin-panel" id="content" data-panel-title="Quản lý nội dung">
+      <div class="admin-layout">
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2>Bài tư vấn dinh dưỡng</h2>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Tiêu đề</th>
+                  <th>Chuyên mục</th>
+                  <th>Ngày cập nhật</th>
+                  <th>Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody id="postsBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2>Soạn bài nhanh</h2>
+          </div>
+          <form class="admin-form">
+            <label>
+              <span>Tiêu đề</span>
+              <input type="text" placeholder="VD: Cách chọn sữa theo độ tuổi">
+            </label>
+            <label>
+              <span>Chuyên mục</span>
+              <select>
+                <option>Tư vấn chọn sữa</option>
+                <option>Mẹ và bé</option>
+                <option>Dinh dưỡng gia đình</option>
+                <option>Khuyến mãi</option>
+              </select>
+            </label>
+            <label>
+              <span>Tóm tắt</span>
+              <textarea rows="5" placeholder="Nhập phần mô tả ngắn hiển thị ngoài danh sách bài viết"></textarea>
+            </label>
+            <button class="admin-btn" type="button">Lưu nháp</button>
+          </form>
+        </section>
+      </div>
+    </section>
+
+    <section class="admin-panel" id="customers" data-panel-title="Quản lý khách hàng">
+      <section class="admin-card">
+        <div class="admin-card__header">
+          <h2>Khách hàng</h2>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Họ tên</th>
+                <th>Số điện thoại</th>
+                <th>Nhóm</th>
+                <th>Đơn đã mua</th>
+                <th>Tổng chi tiêu</th>
+              </tr>
+            </thead>
+            <tbody id="customersBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <section class="admin-panel" id="pages" data-panel-title="Quản lý trang website">
+      <section class="admin-card">
+        <div class="admin-card__header">
+          <h2>Trang đang có</h2>
+          <span class="admin-note">Dùng để kiểm soát nội dung và đường dẫn trong template hiện tại</span>
+        </div>
+        <div class="page-grid" id="pagesGrid"></div>
+      </section>
+    </section>
+
+    <section class="admin-panel" id="settings" data-panel-title="Cài đặt cửa hàng">
+      <div class="admin-grid admin-grid--two">
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2>Thông tin cửa hàng</h2>
+          </div>
+          <form class="admin-form">
+            <label>
+              <span>Tên website</span>
+              <input type="text" value="Siêu thị sữa Thành Hậu">
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" value="lienhe@suathanhhau.vn">
+            </label>
+            <label>
+              <span>Hotline</span>
+              <input type="tel" placeholder="Nhập số điện thoại chính thức">
+            </label>
+            <label>
+              <span>Địa chỉ</span>
+              <textarea rows="3" placeholder="Nhập địa chỉ cửa hàng"></textarea>
+            </label>
+            <button class="admin-btn" type="button">Lưu cài đặt</button>
+          </form>
+        </section>
+
+        <section class="admin-card">
+          <div class="admin-card__header">
+            <h2>Cấu hình dữ liệu</h2>
+          </div>
+          <div class="settings-list">
+            <label><input type="checkbox" checked> Hiển thị sản phẩm còn hàng</label>
+            <label><input type="checkbox" checked> Cho phép đặt hàng chưa đăng nhập</label>
+            <label><input type="checkbox"> Tự động ẩn sản phẩm hết hạn sử dụng</label>
+            <label><input type="checkbox" checked> Bật bài tư vấn ngoài trang chủ</label>
+          </div>
+          <div class="admin-note admin-note--box">
+            Trang admin hiện dùng dữ liệu mẫu trên trình duyệt. Khi có backend, các bảng này có thể nối API để quản lý dữ liệu thật.
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div class="admin-toast" id="adminToast" role="status" aria-live="polite"></div>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
