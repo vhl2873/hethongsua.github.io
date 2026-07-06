@@ -1,0 +1,40 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cài đặt toàn website - Admin Thành Hậu</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
+  <link rel="stylesheet" href="../assets/css/admin-pro.css">
+</head>
+<body data-admin-page="settings">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="index.html"><span class="admin-brand__mark">TH</span><span><strong>Thành Hậu</strong><small>Quản trị cửa hàng sữa</small></span></a>
+    <nav class="admin-nav">
+      <a href="index.html" data-page="dashboard" data-icon="01">Tổng quan</a>
+      <a href="catalog.html" data-page="catalog" data-icon="02">Sản phẩm</a>
+      <a href="sales.html" data-page="sales" data-icon="03">Bán hàng</a>
+      <a href="content.html" data-page="content" data-icon="04">Nội dung</a>
+      <a href="marketing.html" data-page="marketing" data-icon="05">Hiển thị</a>
+      <a href="audience.html" data-page="audience" data-icon="06">Khách hàng</a>
+      <a href="navigation.html" data-page="navigation" data-icon="07">Menu & trang</a>
+      <a href="media.html" data-page="media" data-icon="08">Thư viện ảnh</a>
+      <a href="data.html" data-page="data" data-icon="09">Dữ liệu</a>
+      <a href="settings.html" data-page="settings" data-icon="10">Cài đặt</a>
+    </nav>
+    <div class="admin-connection"><span>Kết nối API</span><strong id="apiStatus">Đang kiểm tra</strong><small id="apiBaseLabel">http://localhost:3001</small></div>
+    <div class="admin-sidebar__links"><a href="../index.html" target="_blank">Xem website</a><a href="../shop.html" target="_blank">Xem shop</a></div>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div><p class="eyebrow">Siêu thị sữa Thành Hậu</p><h1>Cài đặt toàn website</h1></div>
+      <div class="topbar-actions"><label class="search"><span>Tìm nhanh</span><input id="globalSearch" type="search" placeholder="Sản phẩm, đơn hàng, bài viết..."></label><button class="btn ghost" id="reloadBtn" type="button">Tải lại</button><div class="admin-user"><span class="admin-avatar">TH</span><span><strong>Quản trị viên</strong><small>Quản trị cửa hàng</small></span></div></div>
+    </header>
+    <section><div class="grid two"><section class="card"><div class="card-head"><h2>Thông tin cửa hàng</h2></div><form class="form mini" id="storeSettingsForm"><input name="name" placeholder="Tên cửa hàng"><input name="phone" placeholder="Hotline"><input name="email" placeholder="Email"><textarea name="address" rows="3" placeholder="Địa chỉ"></textarea><button class="btn" type="submit">Lưu cài đặt</button></form></section><section class="card"><div class="card-head"><h2>API</h2></div><label class="search full"><span>Đường dẫn API</span><input id="apiBaseInput" type="url"></label><button class="btn" id="saveApiBaseBtn" type="button">Lưu API</button><div class="note-box">Admin này quản trị toàn bộ nội dung hiển thị của website. Khóa bí mật chỉ nằm ở backend, không đưa vào frontend.</div></section></div></section>
+  </main>
+  <div class="toast" id="adminToast" role="status" aria-live="polite"></div>
+  <script src="../assets/js/admin-pro.js"></script>
+</body>
+</html>
+
+

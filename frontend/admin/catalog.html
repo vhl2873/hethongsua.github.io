@@ -1,0 +1,41 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalog sản phẩm - Admin Thành Hậu</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
+  <link rel="stylesheet" href="../assets/css/admin-pro.css">
+</head>
+<body data-admin-page="catalog">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="index.html"><span class="admin-brand__mark">TH</span><span><strong>Thành Hậu</strong><small>Quản trị cửa hàng sữa</small></span></a>
+    <nav class="admin-nav">
+      <a href="index.html" data-page="dashboard" data-icon="01">Tổng quan</a>
+      <a href="catalog.html" data-page="catalog" data-icon="02">Sản phẩm</a>
+      <a href="sales.html" data-page="sales" data-icon="03">Bán hàng</a>
+      <a href="content.html" data-page="content" data-icon="04">Nội dung</a>
+      <a href="marketing.html" data-page="marketing" data-icon="05">Hiển thị</a>
+      <a href="audience.html" data-page="audience" data-icon="06">Khách hàng</a>
+      <a href="navigation.html" data-page="navigation" data-icon="07">Menu & trang</a>
+      <a href="media.html" data-page="media" data-icon="08">Thư viện ảnh</a>
+      <a href="data.html" data-page="data" data-icon="09">Dữ liệu</a>
+      <a href="settings.html" data-page="settings" data-icon="10">Cài đặt</a>
+    </nav>
+    <div class="admin-connection"><span>Kết nối API</span><strong id="apiStatus">Đang kiểm tra</strong><small id="apiBaseLabel">http://localhost:3001</small></div>
+    <div class="admin-sidebar__links"><a href="../index.html" target="_blank">Xem website</a><a href="../shop.html" target="_blank">Xem shop</a></div>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div><p class="eyebrow">Siêu thị sữa Thành Hậu</p><h1>Catalog sản phẩm</h1></div>
+      <div class="topbar-actions"><label class="search"><span>Tìm nhanh</span><input id="globalSearch" type="search" placeholder="Sản phẩm, đơn hàng, bài viết..."></label><button class="btn ghost" id="reloadBtn" type="button">Tải lại</button><div class="admin-user"><span class="admin-avatar">TH</span><span><strong>Quản trị viên</strong><small>Quản trị cửa hàng</small></span></div></div>
+    </header>
+    <section><div class="toolbar"><div class="filters"><select id="productCategoryFilter"><option value="">Tất cả danh mục</option></select><select id="productStatusFilter"><option value="">Mọi trạng thái</option><option value="active">Đang bán</option><option value="draft">Bản nháp</option><option value="inactive">Đang ẩn</option></select></div><button class="btn" type="button" id="newProductBtn">Thêm sản phẩm</button></div><div class="layout"><section class="card"><div class="card-head"><h2>Sản phẩm</h2><span class="muted" id="productListMeta">0 sản phẩm</span></div><div class="table-wrap"><table class="table"><thead><tr><th>Sản phẩm</th><th>Danh mục</th><th>Giá</th><th>Tồn</th><th>Trạng thái</th><th></th></tr></thead><tbody id="productsBody"></tbody></table></div></section><section class="card editor-card"><div class="card-head"><h2 id="productFormTitle">Thêm sản phẩm</h2><button class="icon-btn" id="resetProductForm" type="button">×</button></div><form class="form" id="productForm"><input type="hidden" id="productId"><input type="hidden" id="productImageUrl"><label><span>Tên sản phẩm</span><input id="productName" required></label><div class="form-row"><label><span>Danh mục</span><select id="productCategory" required></select></label><label><span>SKU</span><input id="productSku"></label></div><div class="form-row"><label><span>Giá bán</span><input id="productPrice" type="number" min="0" step="1000" required></label><label><span>Giá gạch</span><input id="productComparePrice" type="number" min="0" step="1000"></label></div><div class="form-row"><label><span>Tồn kho</span><input id="productStock" type="number" min="0" required></label><label><span>Đơn vị</span><input id="productUnit" placeholder="hộp, lốc, gói"></label></div><div class="form-row"><label><span>Thương hiệu</span><input id="productBrand"></label><label><span>Trạng thái</span><select id="productStatus"><option value="active">Đang bán</option><option value="draft">Bản nháp</option><option value="inactive">Đang ẩn</option></select></label></div><div class="form-row"><label><span>Độ tuổi</span><input id="productAgeRange" placeholder="0-6 tháng, 1 tuổi trở lên..."></label><label><span>Xuất xứ</span><input id="productOrigin" placeholder="Việt Nam, Úc, Nhật..."></label></div><label><span>Tags SEO</span><input id="productTags" placeholder="sữa bột, dinh dưỡng, mẹ và bé"></label><label><span>Mô tả ngắn</span><textarea id="productShortDescription" rows="3"></textarea></label><label><span>Mô tả chi tiết</span><textarea id="productDescription" rows="5"></textarea></label><div class="upload-box"><span>Ảnh sản phẩm</span><input id="productImage" type="file" accept="image/jpeg,image/png,image/webp"><img id="imagePreview" hidden alt="Ảnh sản phẩm"></div><label class="check"><input id="productFeatured" type="checkbox"> Sản phẩm nổi bật</label><button class="btn" id="saveProductBtn" type="submit">Lưu sản phẩm</button></form></section></div><div class="grid two lower-grid"><section class="card"><div class="card-head"><h2>Danh mục shop</h2></div><form class="inline-form" data-generic-form="product_categories"><input name="name" placeholder="Tên danh mục" required><input name="description" placeholder="Mô tả"><button class="btn" type="submit">Thêm</button></form><div class="compact-list" id="categoryList"></div></section><section class="card"><div class="card-head"><h2>Biến thể sản phẩm</h2></div><form class="form mini" id="variantForm"><select id="variantProduct" required></select><div class="form-row"><input id="variantName" placeholder="Tên biến thể: 400g, 800g..." required><input id="variantSku" placeholder="SKU biến thể"></div><div class="form-row"><input id="variantPrice" type="number" min="0" step="1000" placeholder="Giá riêng"><input id="variantStock" type="number" min="0" placeholder="Tồn kho"></div><button class="btn" type="submit">Lưu biến thể</button></form><div class="compact-list" id="variantList"></div></section></div><div class="grid two lower-grid"><section class="card"><div class="card-head"><h2>Tồn kho</h2></div><div class="table-wrap"><table class="table compact"><thead><tr><th>Sản phẩm</th><th>SKU</th><th>Tồn</th><th>Ghi chú</th></tr></thead><tbody id="inventoryBody"></tbody></table></div></section><section class="card"><div class="card-head"><h2>Phiếu nhập/xuất kho</h2></div><form class="form mini" id="inventoryForm"><select id="inventoryProduct" required></select><div class="form-row"><select id="inventoryType"><option value="import">Nhập kho</option><option value="export">Xuất kho</option><option value="adjustment">Điều chỉnh</option><option value="order">Trừ theo đơn</option></select><input id="inventoryQuantity" type="number" placeholder="Số lượng" required></div><textarea id="inventoryNote" rows="2" placeholder="Ghi chú phiếu kho"></textarea><button class="btn" type="submit">Lưu phiếu kho</button></form><div class="compact-list" id="inventoryMovementList"></div></section></div></section>
+  </main>
+  <div class="toast" id="adminToast" role="status" aria-live="polite"></div>
+  <script src="../assets/js/admin-pro.js"></script>
+</body>
+</html>
+
+
+

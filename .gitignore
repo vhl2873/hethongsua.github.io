@@ -1,0 +1,23 @@
+﻿# Local environment secrets
+.env
+.env.local
+.env.*.local
+backend/.env
+backend/.env.local
+backend/.env.*.local
+
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Runtime/build output
+backend/dist/
+backend/.cache/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Local design references
+.admin-reference/

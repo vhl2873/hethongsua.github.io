@@ -1,0 +1,41 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bán hàng & checkout - Admin Thành Hậu</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicon.ico">
+  <link rel="stylesheet" href="../assets/css/admin-pro.css">
+</head>
+<body data-admin-page="sales">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="index.html"><span class="admin-brand__mark">TH</span><span><strong>Thành Hậu</strong><small>Quản trị cửa hàng sữa</small></span></a>
+    <nav class="admin-nav">
+      <a href="index.html" data-page="dashboard" data-icon="01">Tổng quan</a>
+      <a href="catalog.html" data-page="catalog" data-icon="02">Sản phẩm</a>
+      <a href="sales.html" data-page="sales" data-icon="03">Bán hàng</a>
+      <a href="content.html" data-page="content" data-icon="04">Nội dung</a>
+      <a href="marketing.html" data-page="marketing" data-icon="05">Hiển thị</a>
+      <a href="audience.html" data-page="audience" data-icon="06">Khách hàng</a>
+      <a href="navigation.html" data-page="navigation" data-icon="07">Menu & trang</a>
+      <a href="media.html" data-page="media" data-icon="08">Thư viện ảnh</a>
+      <a href="data.html" data-page="data" data-icon="09">Dữ liệu</a>
+      <a href="settings.html" data-page="settings" data-icon="10">Cài đặt</a>
+    </nav>
+    <div class="admin-connection"><span>Kết nối API</span><strong id="apiStatus">Đang kiểm tra</strong><small id="apiBaseLabel">http://localhost:3001</small></div>
+    <div class="admin-sidebar__links"><a href="../index.html" target="_blank">Xem website</a><a href="../shop.html" target="_blank">Xem shop</a></div>
+  </aside>
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div><p class="eyebrow">Siêu thị sữa Thành Hậu</p><h1>Bán hàng & checkout</h1></div>
+      <div class="topbar-actions"><label class="search"><span>Tìm nhanh</span><input id="globalSearch" type="search" placeholder="Sản phẩm, đơn hàng, bài viết..."></label><button class="btn ghost" id="reloadBtn" type="button">Tải lại</button><div class="admin-user"><span class="admin-avatar">TH</span><span><strong>Quản trị viên</strong><small>Quản trị cửa hàng</small></span></div></div>
+    </header>
+    <section><div class="grid two"><section class="card span-2"><div class="card-head"><h2>Đơn hàng</h2><span class="muted" id="orderListMeta">0 đơn</span></div><div class="table-wrap"><table class="table"><thead><tr><th>Mã đơn</th><th>Khách</th><th>SĐT</th><th>Tổng</th><th>Thanh toán</th><th>Trạng thái</th><th>Ngày</th><th>Cập nhật</th></tr></thead><tbody id="ordersBody"></tbody></table></div></section><section class="card"><div class="card-head"><h2>Mã giảm giá</h2></div><form class="form mini" data-generic-form="coupons"><input name="code" placeholder="Mã coupon" required><input name="name" placeholder="Tên chương trình" required><select name="discount_type"><option value="fixed">Giảm tiền</option><option value="percent">Phần trăm</option></select><div class="form-row"><input name="discount_value" type="number" placeholder="Giá trị" required><input name="max_discount_amount" type="number" placeholder="Giảm tối đa"></div><div class="form-row"><input name="min_order_amount" type="number" placeholder="Đơn tối thiểu"><input name="usage_limit" type="number" placeholder="Giới hạn lượt"></div><div class="form-row"><input name="starts_at" type="datetime-local"><input name="ends_at" type="datetime-local"></div><label class="check"><input name="is_active" type="checkbox" checked> Đang bật</label><button class="btn" type="submit">Lưu coupon</button></form><div class="compact-list" id="couponList"></div></section><section class="card"><div class="card-head"><h2>Vận chuyển & thanh toán</h2></div><form class="form mini" data-generic-form="shipping_methods"><input name="name" placeholder="Phương thức giao hàng" required><textarea name="description" rows="2" placeholder="Mô tả"></textarea><div class="form-row"><input name="fee" type="number" placeholder="Phí"><input name="min_order_amount" type="number" placeholder="Miễn/áp dụng từ đơn"></div><div class="form-row"><input name="sort_order" type="number" placeholder="Thứ tự"><label class="check"><input name="is_active" type="checkbox" checked> Đang bật</label></div><button class="btn" type="submit">Lưu giao hàng</button></form><form class="form mini" data-generic-form="payment_methods"><input name="name" placeholder="Phương thức thanh toán" required><input name="code" placeholder="Mã" required><textarea name="description" rows="2" placeholder="Mô tả"></textarea><div class="form-row"><input name="sort_order" type="number" placeholder="Thứ tự"><label class="check"><input name="is_active" type="checkbox" checked> Đang bật</label></div><button class="btn" type="submit">Lưu thanh toán</button></form><div class="compact-list" id="paymentShippingList"></div></section></div></section>
+  </main>
+  <div class="toast" id="adminToast" role="status" aria-live="polite"></div>
+  <script src="../assets/js/admin-pro.js"></script>
+</body>
+</html>
+
+
+
